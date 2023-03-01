@@ -1,0 +1,11 @@
+export type Repo = {
+  id: number;
+  name: string;
+  description: string;
+  web_url: string;
+  img_url: string;
+};
+
+export type urlParams = {
+  id: number;
+};
