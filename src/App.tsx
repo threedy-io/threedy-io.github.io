@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import GitGroupLoader from './components/GitGroupLoader';
+import { useState } from 'react';
+import GitDataLoader from './components/GitDataLoader';
 import './App.css';
 
 import threedyLogo from './assets/instant3Dhub-logo.svg';
@@ -8,6 +8,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { Repo } from './types';
+import RepoCards from './components/RepoCards';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -37,15 +39,34 @@ function TabPanel(props: TabPanelProps) {
 
 function App() {
   const [value, setValue] = useState(0);
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  const [group1Data, setGroup1Data] = useState<Repo[]>([]);
+  const [group2Data, setGroup2Data] = useState<Repo[]>([]);
+  const [group3Data, setGroup3Data] = useState<Repo[]>([]);
+
+  const handleData1Loaded = (newRepos: Repo[]) => {
+    setGroup1Data(newRepos);
+  };
+  const handleData2Loaded = (newRepos: Repo[]) => {
+    setGroup2Data(newRepos);
+  };
+
+  const handleData3Loaded = (newRepos: Repo[]) => {
+    setGroup3Data(newRepos);
   };
 
   return (
     <>
       <main>
         <div>
+          {/* replace IDs with groups you want to render */}
+          <GitDataLoader id={105} onDataLoaded={handleData1Loaded} />
+          <GitDataLoader id={104} onDataLoaded={handleData2Loaded} />
+          <GitDataLoader id={106} onDataLoaded={handleData3Loaded} />
+
           <a href='https://hubdemo.threedy.io/' target='_blank'>
             <img src={threedyLogo} className='logo ' alt='Threedy logo' />
           </a>
@@ -83,20 +104,20 @@ function App() {
         <TabPanel value={value} index={0}>
           {/*end users tab*/}
           <div className='repo-card-container'>
-            <GitGroupLoader id={105} />
+            <RepoCards repos={group1Data} />
           </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
           {' '}
           {/*developers tab*/}
           <div className='repo-card-container'>
-            <GitGroupLoader id={104} />
+            <RepoCards repos={group2Data} />
           </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
           {/*integrators tab*/}
           <div className='repo-card-container'>
-            <GitGroupLoader id={106} />
+            <RepoCards repos={group3Data} />
           </div>
         </TabPanel>
       </main>
