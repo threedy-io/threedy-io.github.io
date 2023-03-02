@@ -9,15 +9,8 @@ import { TabPanel } from './components/TabPanel';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { Repo } from './types';
 import RepoCards from './components/RepoCards';
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
 
 function App() {
   const [value, setValue] = useState(0);
@@ -25,6 +18,7 @@ function App() {
     setValue(newValue);
   };
 
+  // stores repo information for each group
   const [group1Data, setGroup1Data] = useState<Repo[]>([]);
   const [group2Data, setGroup2Data] = useState<Repo[]>([]);
   const [group3Data, setGroup3Data] = useState<Repo[]>([]);

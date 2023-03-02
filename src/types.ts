@@ -9,3 +9,9 @@ export type Repo = {
 export type urlParams = {
   id: number;
 };
+
+export type TabPanelProps = {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+};
