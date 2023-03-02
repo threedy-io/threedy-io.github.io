@@ -47,11 +47,11 @@ const GitDataLoader = (props: urlParams) => {
         const reposWithDetails = repoDatas.map((repoData) => {
           let thumb_url = fallbackImage;
           //check if image exists. if it doesnt, use the fallback img
-          fetch(`${repoData.web_url}/-/raw/master/thumb.png`, {
+          fetch(`${repoData.web_url}/-/raw/master/thumb.jpg`, {
             method: 'HEAD',
           }).then((res) => {
             if (res.ok) {
-              thumb_url = `${repoData.web_url}/-/raw/master/thumb.png`;
+              thumb_url = `${repoData.web_url}/-/raw/master/thumb.jpg`;
             }
           });
 
