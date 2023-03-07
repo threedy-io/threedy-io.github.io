@@ -67,8 +67,8 @@ a {
 }
 
 .repo-card > img {
-  min-width: 400px;
-  height: 200px;
+  width: 400px;
+  height: 225px;
 }
 
 .repo-card-description {
