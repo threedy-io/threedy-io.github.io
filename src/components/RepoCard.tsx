@@ -17,7 +17,7 @@ const RepoCard = (props: Repo) => {
 RepoCard.defaultProps = {
   id: 0,
   img_url: fallbackImage,
-  description: 'fallback (repo description is empty)',
+  description: ' ',
 };
 
 export default RepoCard;

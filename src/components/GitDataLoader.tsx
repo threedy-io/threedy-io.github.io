@@ -65,7 +65,6 @@ const GitDataLoader = (props: urlParams) => {
                 thumb_url = URL.createObjectURL(thumbBlob);
               } else {
                 thumb_url = fallbackImage;
-                console.log('thumb.jpg doesnt exist');
               }
             } catch (error) {
               console.error(error);
