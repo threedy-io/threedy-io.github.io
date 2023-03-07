@@ -7,7 +7,7 @@ type Props = {
 
 const RepoCards = ({ repos }: Props) => {
   if (!repos) {
-    return <div>Loading...</div>;
+    return <div className='loading-message'>Loading projects...</div>;
   }
 
   return (

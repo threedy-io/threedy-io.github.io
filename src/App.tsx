@@ -19,9 +19,9 @@ function App() {
   };
 
   // stores repo information for each group
-  const [group1Data, setGroup1Data] = useState<Repo[]>([]);
-  const [group2Data, setGroup2Data] = useState<Repo[]>([]);
-  const [group3Data, setGroup3Data] = useState<Repo[]>([]);
+  const [group1Data, setGroup1Data] = useState<Repo[] | null>(null);
+  const [group2Data, setGroup2Data] = useState<Repo[] | null>(null);
+  const [group3Data, setGroup3Data] = useState<Repo[] | null>(null);
 
   const handleData1Loaded = (newRepos: Repo[]) => {
     setGroup1Data(newRepos);
@@ -71,7 +71,7 @@ function App() {
                 '& button.Mui-selected': { color: 'var(--threedy-green)' },
               }}
             >
-              <Tab label='for end users' />
+              <Tab label='use cases' />
               <Tab label='for developers' />
               <Tab label='for integrators' />
             </Tabs>
