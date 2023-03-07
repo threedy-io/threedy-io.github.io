@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import GitRepoLoader from './GitRepoLoader';
-import RepoCard from './RepoCard';
 import fallbackImage from '../assets/fallback.png';
 import { Repo } from '../types';
 
-type urlParams = {
-  id: number;
-  onDataLoaded: (repos: Repo[]) => void;
-};
+import type { urlParams } from '../types';
+
+const API_URL = 'https://git.threedy.io/api/v4/';
 
 const GitDataLoader = (props: urlParams) => {
   const [repos, setRepos] = useState<Repo[] | null>(null);
@@ -17,7 +14,7 @@ const GitDataLoader = (props: urlParams) => {
       try {
         // Fetch group data
         const groupResponse = await fetch(
-          `https://git.threedy.io/api/v4/groups/${props.id}/projects`,
+          `${API_URL}groups/${props.id}/projects`,
           {
             headers: {
               Authorization: `Bearer ${import.meta.env.VITE_GITLAB_TOKEN}`,
@@ -32,7 +29,7 @@ const GitDataLoader = (props: urlParams) => {
         // Fetch repo data for each ID
         const repoResponses = await Promise.all(
           repoIDs.map((id: number) =>
-            fetch(`https://git.threedy.io/api/v4/projects/${id}`, {
+            fetch(`${API_URL}projects/${id}`, {
               headers: {
                 Authorization: `Bearer ${import.meta.env.VITE_GITLAB_TOKEN}`,
               },
@@ -44,23 +41,41 @@ const GitDataLoader = (props: urlParams) => {
         );
 
         // Construct repo details objects
-        const reposWithDetails = repoDatas.map((repoData) => {
-          let thumb_url = fallbackImage;
-          //check if image exists. if it doesnt, use the fallback img
-          fetch(`${repoData.web_url}/-/raw/master/thumb.jpg`, {
-            method: 'HEAD',
-          }).then((res) => {
-            if (res.ok) {
-              thumb_url = `${repoData.web_url}/-/raw/master/thumb.jpg`;
-            }
-          });
+        const reposWithDetails = await Promise.all(
+          repoDatas.map(async (repoData) => {
+            let thumb_url = '';
 
-          return {
-            ...repoData,
-            img_url: thumb_url,
-            description: repoData.description,
-          };
-        });
+            try {
+              const response = await fetch(
+                `${API_URL}projects/${repoData.id}/repository/files/thumb.jpg/raw?ref=master`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${
+                      import.meta.env.VITE_GITLAB_TOKEN
+                    }`,
+                  },
+                }
+              );
+
+              if (response.ok) {
+                const thumbBlob = await response.blob();
+
+                thumb_url = URL.createObjectURL(thumbBlob);
+              } else {
+                thumb_url = fallbackImage;
+              }
+            } catch (error) {
+              console.error(error);
+              thumb_url = fallbackImage;
+            }
+
+            return {
+              ...repoData,
+              img_url: thumb_url,
+              description: repoData.description,
+            };
+          })
+        );
 
         setRepos(reposWithDetails);
       } catch (error) {

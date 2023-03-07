@@ -8,6 +8,7 @@ export type Repo = {
 
 export type urlParams = {
   id: number;
+  onDataLoaded: (repos: Repo[]) => void;
 };
 
 export type TabPanelProps = {
