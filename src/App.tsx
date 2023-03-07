@@ -39,9 +39,18 @@ function App() {
       <main>
         <div>
           {/* replace IDs with groups you want to render */}
-          <GitDataLoader id={105} onDataLoaded={handleData1Loaded} />
-          <GitDataLoader id={104} onDataLoaded={handleData2Loaded} />
-          <GitDataLoader id={106} onDataLoaded={handleData3Loaded} />
+          <GitDataLoader
+            id={import.meta.env.VITE_USECASE_GROUP_ID}
+            onDataLoaded={handleData1Loaded}
+          />
+          <GitDataLoader
+            id={import.meta.env.VITE_DEVELOPER_GROUP_ID}
+            onDataLoaded={handleData2Loaded}
+          />
+          <GitDataLoader
+            id={import.meta.env.VITE_INTEGRATOR_GROUP_ID}
+            onDataLoaded={handleData3Loaded}
+          />
 
           <a href='https://hubdemo.threedy.io/' target='_blank'>
             <img src={threedyLogo} className='logo ' alt='Threedy logo' />

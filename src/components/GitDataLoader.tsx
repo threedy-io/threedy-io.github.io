@@ -4,7 +4,7 @@ import { Repo } from '../types';
 
 import type { urlParams } from '../types';
 
-const API_URL = 'https://git.threedy.io/api/v4/';
+const API_URL = import.meta.env.VITE_API_BASEURL;
 
 const GitDataLoader = (props: urlParams) => {
   const [repos, setRepos] = useState<Repo[] | null>(null);
@@ -17,7 +17,9 @@ const GitDataLoader = (props: urlParams) => {
           `${API_URL}groups/${props.id}/projects`,
           {
             headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_GITLAB_TOKEN}`,
+              Authorization: `Bearer ${
+                import.meta.env.local.VITE_GITLAB_TOKEN
+              }`,
             },
           }
         );
@@ -63,6 +65,7 @@ const GitDataLoader = (props: urlParams) => {
                 thumb_url = URL.createObjectURL(thumbBlob);
               } else {
                 thumb_url = fallbackImage;
+                console.log('thumb.jpg doesnt exist');
               }
             } catch (error) {
               console.error(error);
