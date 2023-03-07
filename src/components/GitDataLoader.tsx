@@ -17,9 +17,7 @@ const GitDataLoader = (props: urlParams) => {
           `${API_URL}groups/${props.id}/projects`,
           {
             headers: {
-              Authorization: `Bearer ${
-                import.meta.env.local.VITE_GITLAB_TOKEN
-              }`,
+              Authorization: `Bearer ${import.meta.env.VITE_GITLAB_TOKEN}`,
             },
           }
         );
