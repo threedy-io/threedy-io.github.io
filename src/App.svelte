@@ -1,11 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { loadData, loadAllRepos } from './lib/LoadGithubData';
+  import { loadAllRepos } from './lib/LoadGithubData';
 
   import GridItem from './lib/GridItem.svelte';
   import Header from './lib/Header.svelte';
   import { Tabs, TabList, TabPanel, Tab } from './lib/tabnav/tabs';
-  import GridItemSmall from './lib/GridItemSmall.svelte';
 
   // Stores repo data and loading status
   let isLoading = true;

@@ -20,8 +20,9 @@
   async function handleThumbnails() {
     if (thumbnailLoaded) return;
 
+    thumbnailLoaded=true
     thumbnailData = await loadRepoImage(title);
-    console.log('url is', thumbnailData);
+    // console.log('url is', thumbnailData);
   }
 
   onMount(handleThumbnails);

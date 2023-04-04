@@ -19,8 +19,9 @@
     border-bottom: 2px solid white;
     border-radius: 0;
     margin: 0;
-    color: #ccc;
+    color: white;
     font-size: 2rem;
+    font-weight: 500;
     margin-bottom: var(--font-scale-2);
   }
 
