@@ -23,6 +23,7 @@
     font-size: 2rem;
     font-weight: 500;
     margin-bottom: var(--font-scale-2);
+    outline: none;
   }
 
   .selected {
