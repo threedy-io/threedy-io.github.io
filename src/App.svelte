@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { loadAllRepos } from './lib/LoadGithubData';
+  import { loadAllRepos, loadImageWithoutToken } from './lib/LoadGithubData';
 
   import GridItem from './lib/GridItem.svelte';
   import Header from './lib/Header.svelte';
@@ -32,9 +32,12 @@
       repo.topics.includes(SECOND_TOPIC)
     );
 
-    //  devRepos = await loadData(FIRST_TOPIC, 3);
-    //  integratorRepos = await loadData(SECOND_TOPIC, 3);
-
+    //add images
+    for (const repo of allRepoData) {
+      const thumbnailData = await loadImageWithoutToken(repo.name);
+      repo.thumbnail = thumbnailData;
+      console.log(repo);
+    }
     isLoading = false;
   }
 
@@ -47,18 +50,12 @@
       type="checkbox"
       name="toggleTabs"
       id=""
-      bind:checked={showTabPanel}
-    />
-    <input
-      type="checkbox"
-      name="toggleTabs"
-      id=""
       bind:checked={showGridPanel}
     />
   </div>
   <Header />
   {#if isLoading}
-    <p class="loading-message">Loading...</p>
+    <p class="loading-message">Loading repositories...</p>
   {:else}
     {#if showGridPanel}
       <h2 class="grid-title">Use Cases</h2>
@@ -68,71 +65,45 @@
             url={item.html_url}
             title={item.name}
             description={item.description}
+            imageBlob={item.thumbnail}
           />
         {/each}
       </div>
       <button class="grid-showall-btn">VIEW ALL PROJECTS</button>
     {/if}
 
-    {#if showTabPanel}
-      <Tabs>
-        <TabList>
-          <Tab>for developers</Tab>
-          <Tab>for integrators</Tab>
-        </TabList>
+    <Tabs>
+      <TabList>
+        <Tab>for developers</Tab>
+        <Tab>for integrators</Tab>
+      </TabList>
 
-        <TabPanel>
-          <div class="grid">
-            {#each devRepos as item}
-              <GridItem
-                url={item.html_url}
-                title={item.name}
-                description={item.description}
-              />
-            {/each}
-          </div>
-        </TabPanel>
-
-        <TabPanel>
-          <div class="grid">
-            {#each integratorRepos as item}
-              <GridItem
-                url={item.html_url}
-                title={item.name}
-                description={item.description}
-              />
-            {/each}
-          </div>
-        </TabPanel>
-      </Tabs>
-
-      <!-- else if tab nav is not selected -->
-    {:else}
-      <div class="row">
-        <div class="column">
-          <h2>For Developers</h2>
+      <TabPanel>
+        <div class="grid">
           {#each devRepos as item}
             <GridItem
+              url={item.html_url}
               title={item.name}
               description={item.description}
-              url={item.html_url}
+              imageBlob={item.thumbnail}
             />
           {/each}
-          <button>see more</button>
         </div>
-        <div class="column">
-          <h2>For Integrators</h2>
+      </TabPanel>
+
+      <TabPanel>
+        <div class="grid">
           {#each integratorRepos as item}
             <GridItem
+              url={item.html_url}
               title={item.name}
               description={item.description}
-              url={item.html_url}
+              imageBlob={item.thumbnail}
             />
           {/each}
-          <button>see more</button>
         </div>
-      </div>
-    {/if}
+      </TabPanel>
+    </Tabs>
   {/if}
 </main>
 

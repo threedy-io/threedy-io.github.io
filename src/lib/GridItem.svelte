@@ -1,19 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import FallbackImage from '../assets/fallback.png';
-  import {
-    loadRepoLanguage,
-    loadRepoImage,
-    loadImageWithoutToken,
-  } from './LoadGithubData';
+  import { loadRepoLanguage } from './LoadGithubData';
   // import LanguageBars from './LanguageBars.svelte';
   export let title: string;
   export let description: string;
   export let url: string;
+  export let imageBlob;
+  let imageUrl;
 
   let languagesLoaded = false;
   let thumbnailLoaded = false;
-  let thumbnailData = '';
 
   async function handleLanguages() {
     if (languagesLoaded) return;
@@ -24,9 +21,7 @@
   async function handleThumbnails() {
     if (thumbnailLoaded) return;
 
-    thumbnailLoaded = true;
-    thumbnailData = await loadImageWithoutToken(title);
-    // console.log('url is', thumbnailData);
+    imageUrl = URL.createObjectURL(imageBlob);
   }
 
   onMount(handleThumbnails);
@@ -34,8 +29,9 @@
 
 <div class="repo-card">
   <img
-    src={thumbnailData ? `${thumbnailData}` : FallbackImage}
+    src={imageBlob}
     alt="repository example"
+    on:error={() => (imageBlob = FallbackImage)}
   />
   <div class="card-text">
     <h3 class="card-title">{title}</h3>
@@ -73,8 +69,6 @@
     display: block;
   }
 
-  /* card item styles */
-
   .repo-card {
     margin: 0.5rem;
     box-shadow: rgba(255, 255, 255, 0.05) 0px 0px 0px 1px;
@@ -84,7 +78,6 @@
     overflow: hidden;
     max-width: 300px;
     min-width: 380px;
-    /* height: 415px; */
     border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
     text-align: left;

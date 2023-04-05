@@ -77,6 +77,6 @@ export async function loadImageWithoutToken(repo: string): Promise<string> {
     })
     .catch((error) => {
       console.error('Error:', error);
-      throw error;
+      return "";
     });
 }
