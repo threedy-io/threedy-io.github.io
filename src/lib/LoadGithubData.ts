@@ -1,4 +1,4 @@
-const BASEURL = '/users/lumsdnb/';
+const BASEURL = 'https://api.github.com/users/lumsdnb/';
 
 const headers = {
   Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
@@ -6,7 +6,7 @@ const headers = {
 
 export async function loadData(topic: string, amount: number) {
   const response = await fetch(
-    `https://api.github.com${BASEURL}repos?topics=${topic}&per_page=${amount}`,
+    `${BASEURL}repos?topics=${topic}&per_page=${amount}`,
     { headers }
   );
   if (!response.ok) {
@@ -18,7 +18,7 @@ export async function loadData(topic: string, amount: number) {
 }
 
 export async function loadAllRepos() {
-  const response = await fetch(`https://api.github.com${BASEURL}repos`, {
+  const response = await fetch(`${BASEURL}repos`, {
     headers,
   });
   if (!response.ok) {

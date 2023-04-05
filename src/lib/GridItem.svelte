@@ -1,7 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import FallbackImage from '../assets/fallback.png';
-  import { loadRepoLanguage, loadRepoImage } from './LoadGithubData';
+  import {
+    loadRepoLanguage,
+    loadRepoImage,
+    loadImageWithoutToken,
+  } from './LoadGithubData';
   // import LanguageBars from './LanguageBars.svelte';
   export let title: string;
   export let description: string;
@@ -20,8 +24,8 @@
   async function handleThumbnails() {
     if (thumbnailLoaded) return;
 
-    thumbnailLoaded=true
-    thumbnailData = await loadRepoImage(title);
+    thumbnailLoaded = true;
+    thumbnailData = await loadImageWithoutToken(title);
     // console.log('url is', thumbnailData);
   }
 
@@ -30,9 +34,7 @@
 
 <div class="repo-card">
   <img
-    src={thumbnailData
-      ? `data:image/jpeg;base64,${thumbnailData}`
-      : FallbackImage}
+    src={thumbnailData ? `${thumbnailData}` : FallbackImage}
     alt="repository example"
   />
   <div class="card-text">
