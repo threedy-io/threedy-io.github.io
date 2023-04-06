@@ -129,22 +129,6 @@
     grid-column-start: 2;
   }
 
-  /* Style your columns */
-  .column {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 0;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -178,16 +162,6 @@
     bottom: 1rem;
     font-size: var(--font-scale-4);
     margin-bottom: 3rem;
-  }
-
-  /* Clear floats after the columns */
-  .row:after {
-    content: '';
-    display: table;
-    clear: both;
-  }
-  input {
-    color: white;
   }
 
   .controls {
