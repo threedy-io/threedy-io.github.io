@@ -13,8 +13,7 @@
   let integratorRepos;
   let topRepos;
 
-  let showGridPanel = false;
-  let showTabPanel = true;
+  const showGridPanel = false;
 
   const FIRST_TOPIC = import.meta.env.VITE_TOPIC_1;
   const SECOND_TOPIC = import.meta.env.VITE_TOPIC_2;
@@ -45,14 +44,6 @@
 </script>
 
 <main>
-  <div class="controls">
-    <input
-      type="checkbox"
-      name="toggleTabs"
-      id=""
-      bind:checked={showGridPanel}
-    />
-  </div>
   <Header />
   {#if isLoading}
     <p class="loading-message">Loading repositories...</p>
@@ -162,13 +153,5 @@
     bottom: 1rem;
     font-size: var(--font-scale-4);
     margin-bottom: 3rem;
-  }
-
-  .controls {
-    position: fixed;
-    padding: 1rem;
-    top: 0;
-    right: 0;
-    background-color: black;
   }
 </style>
