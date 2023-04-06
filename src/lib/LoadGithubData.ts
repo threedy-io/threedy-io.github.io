@@ -1,4 +1,5 @@
-const BASEURL = 'https://api.github.com/users/lumsdnb/';
+const BASEURL = import.meta.env.VITE_BASEURL;
+const USERNAME = import.meta.env.VITE_USERNAME
 
 const headers = {
   Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
@@ -6,7 +7,7 @@ const headers = {
 
 export async function loadData(topic: string, amount: number) {
   const response = await fetch(
-    `${BASEURL}repos?topics=${topic}&per_page=${amount}`,
+    `${BASEURL}/${USERNAME}repos?topics=${topic}&per_page=${amount}`,
     { headers }
   );
   if (!response.ok) {
@@ -18,9 +19,10 @@ export async function loadData(topic: string, amount: number) {
 }
 
 export async function loadAllRepos() {
-  const response = await fetch(`${BASEURL}repos`, {
-    headers,
-  });
+  // const response = await fetch(`${BASEURL}/${BASEURL}/repos`, {
+  //   headers,
+  // });
+  const response = await fetch(`${BASEURL}/users/${USERNAME}/repos`);
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -31,7 +33,7 @@ export async function loadAllRepos() {
 
 export async function loadRepoLanguage(repo: string) {
   const response = await fetch(
-    `https://api.github.com/repos/lumsdnb/${repo}/languages`
+    `${BASEURL}/repos/${USERNAME}/${repo}/languages`
   );
   if (!response.ok) {
     throw new Error('Failed to fetch data');
@@ -43,7 +45,7 @@ export async function loadRepoLanguage(repo: string) {
 
 export async function loadRepoImage(repo: string) {
   const response = await fetch(
-    `https://api.github.com/repos/lumsdnb/${repo}/contents/thumb.jpg`,
+    `${BASEURL}/repos/${USERNAME}/${repo}/contents/thumb.jpg`,
     { headers }
   );
 
@@ -56,7 +58,7 @@ export async function loadRepoImage(repo: string) {
 }
 
 export async function loadImageWithoutToken(repo: string): Promise<string> {
-  const imgUrl = `https://raw.githubusercontent.com/lumsdnb/${repo}/main/thumb.jpg`;
+  const imgUrl = `https://raw.githubusercontent.com/${USERNAME}/${repo}/main/thumb.jpg`;
   return fetch(imgUrl)
     .then((response) => {
       if (response.ok) {

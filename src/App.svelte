@@ -16,8 +16,8 @@
   let showGridPanel = false;
   let showTabPanel = true;
 
-  const FIRST_TOPIC = 'odin-project';
-  const SECOND_TOPIC = 'portfolio';
+  const FIRST_TOPIC = import.meta.env.VITE_TOPIC_1;
+  const SECOND_TOPIC = import.meta.env.VITE_TOPIC_2;
 
   async function loadAllData() {
     allRepoData = await loadAllRepos();
