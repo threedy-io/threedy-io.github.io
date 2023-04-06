@@ -110,6 +110,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 4rem;
+    flex: 1;
   }
 
   .loading-message {
@@ -153,5 +154,13 @@
     bottom: 1rem;
     font-size: var(--font-scale-4);
     margin-bottom: 3rem;
+  }
+
+  footer {
+    color: var(--threedy-green);
+    z-index: 2;
+    margin: var(--font-scale-6);
+    text-align: center;
+    flex-shrink: 0;
   }
 </style>
