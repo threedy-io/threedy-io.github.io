@@ -6,12 +6,21 @@
   import Header from './lib/Header.svelte';
   import { Tabs, TabList, TabPanel, Tab } from './lib/tabnav/tabs';
 
+  type Repository = {
+    html_url: string;
+    name: string;
+    description: string;
+    thumbnail: string;
+    topics: string[];
+    updated_at: any;
+  };
+
   // Stores repo data and loading status
   let isLoading = true;
-  let allRepoData;
-  let devRepos;
-  let integratorRepos;
-  let topRepos;
+  let allRepoData: Repository[];
+  let devRepos: Repository[];
+  let integratorRepos: Repository[];
+  let topRepos: Repository[];
 
   const showGridPanel = false;
 
@@ -115,8 +124,8 @@
 
   .loading-message {
     padding: 1rem;
-    padding-top: 2.5rem;
-    font-size: 1.8rem;
+    padding-top: var(--font-scale-3);
+    font-size: var(--font-scale-3);
     display: flex;
     grid-column-start: 2;
   }
@@ -124,7 +133,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: var(--font-scale-6);
     margin: 0;
     position: relative;
     margin-bottom: 2rem;
@@ -159,7 +168,7 @@
   footer {
     color: var(--threedy-green);
     z-index: 2;
-    margin: var(--font-scale-6);
+    padding: var(--font-scale-3);
     text-align: center;
     flex-shrink: 0;
   }

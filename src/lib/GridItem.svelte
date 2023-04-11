@@ -7,7 +7,7 @@
   export let description: string;
   export let url: string;
   export let imageBlob;
-  let imageUrl;
+  let imageUrl: string;
 
   let languagesLoaded = false;
   let thumbnailLoaded = false;
