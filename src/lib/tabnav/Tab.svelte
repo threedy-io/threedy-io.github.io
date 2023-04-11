@@ -20,7 +20,7 @@
     border-radius: 0;
     margin: 0;
     color: white;
-    font-size: 2rem;
+    font-size: var(--font-scale-4);
     font-weight: 500;
     margin-bottom: var(--font-scale-2);
     outline: none;
