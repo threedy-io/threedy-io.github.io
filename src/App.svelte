@@ -54,7 +54,9 @@
 
 <main>
   <Header />
-
+  <!-- <div class="controls">
+    <input type="checkbox" name="dev" bind:checked={showGridPanel} />
+  </div> -->
   {#if isLoading}
     <p class="loading-message">Loading repositories...</p>
   {:else}
@@ -117,6 +119,11 @@
 </footer>
 
 <style>
+  .controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
   main {
     padding: 2rem;
     display: flex;
