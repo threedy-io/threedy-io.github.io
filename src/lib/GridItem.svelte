@@ -28,11 +28,13 @@
 </script>
 
 <div class="repo-card">
-  <img
-    src={imageBlob}
-    alt="repository example"
-    on:error={() => (imageBlob = FallbackImage)}
-  />
+  <a target="_blank" href={url}>
+    <img
+      src={imageBlob}
+      alt="repository example"
+      on:error={() => (imageBlob = FallbackImage)}
+    />
+  </a>
   <div class="card-text">
     <h3 class="card-title">{title}</h3>
     <p class="description truncate">{description ?? ''}</p>
@@ -67,6 +69,9 @@
     max-width: 100%;
     height: auto;
     display: block;
+  }
+  img:hover {
+    cursor: pointer;
   }
 
   .repo-card {
