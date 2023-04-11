@@ -54,9 +54,9 @@
 
 <main>
   <Header />
-  <!-- <div class="controls">
+  <div class="controls">
     <input type="checkbox" name="dev" bind:checked={showGridPanel} />
-  </div> -->
+  </div>
   {#if isLoading}
     <p class="loading-message">Loading repositories...</p>
   {:else}
@@ -81,8 +81,8 @@
 
     <Tabs>
       <TabList>
-        <Tab>for developers</Tab>
-        <Tab>for integrators</Tab>
+        <Tab>DEVELOPERS</Tab>
+        <Tab>INTEGRATORS</Tab>
       </TabList>
 
       <TabPanel>
