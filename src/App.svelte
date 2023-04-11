@@ -22,7 +22,7 @@
   let integratorRepos: Repository[];
   let topRepos: Repository[];
 
-  const showGridPanel = false;
+  let showGridPanel = false;
 
   const FIRST_TOPIC = import.meta.env.VITE_TOPIC_1;
   const SECOND_TOPIC = import.meta.env.VITE_TOPIC_2;
@@ -54,6 +54,7 @@
 
 <main>
   <Header />
+
   {#if isLoading}
     <p class="loading-message">Loading repositories...</p>
   {:else}
@@ -69,7 +70,11 @@
           />
         {/each}
       </div>
-      <button class="grid-showall-btn">VIEW ALL PROJECTS</button>
+      <a
+        href="https://github.com/threedy-io"
+        target="_blank"
+        class="grid-showall-btn">VIEW ALL PROJECTS</a
+      >
     {/if}
 
     <Tabs>
@@ -163,6 +168,22 @@
     bottom: 1rem;
     font-size: var(--font-scale-4);
     margin-bottom: 3rem;
+    border-radius: 0;
+    border: 1px solid transparent;
+    color: var(--threedy-dark-blue);
+    padding: 0.6em 1.2em;
+    font-size: var(--font-scale-4);
+    font-weight: 500;
+    font-family: inherit;
+    background-color: var(--threedy-green);
+    cursor: pointer;
+    transition: all 60ms ease-in-out;
+    border: 2px solid transparent;
+  }
+  .grid-showall-btn:hover {
+    border: 2px solid var(--threedy-green);
+    background-color: transparent;
+    color: var(--threedy-green);
   }
 
   footer {
