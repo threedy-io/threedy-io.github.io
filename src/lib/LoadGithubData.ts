@@ -1,5 +1,6 @@
 const BASEURL = import.meta.env.VITE_BASEURL;
 const USERNAME = import.meta.env.VITE_USERNAME
+const BRANCH_NAME = import.meta.env.VITE_BRANCHNAME
 
 const headers = {
   Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
@@ -58,7 +59,7 @@ export async function loadRepoImage(repo: string) {
 }
 
 export async function loadImageWithoutToken(repo: string): Promise<string> {
-  const imgUrl = `https://raw.githubusercontent.com/${USERNAME}/${repo}/main/thumb.jpg`;
+  const imgUrl = `https://raw.githubusercontent.com/${USERNAME}/${repo}/${BRANCH_NAME}/thumb.jpg`;
   return fetch(imgUrl)
     .then((response) => {
       if (response.ok) {
