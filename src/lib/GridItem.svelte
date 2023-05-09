@@ -1,7 +1,5 @@
 <script lang="ts">
   import FallbackImage from '../assets/fallback.png';
-  import { loadRepoLanguage } from './LoadGithubData';
-  // import LanguageBars from './LanguageBars.svelte';
   export let title: string;
   export let description: string;
   export let url: string;
@@ -55,7 +53,7 @@
   }
 
   .repo-card {
-    margin: 0.5rem;
+    margin: var(--font-scale-6);
     box-shadow: rgba(255, 255, 255, 0.05) 0px 0px 0px 1px;
     border-radius: 0.3rem;
     background-color: var(--threedy-dark-blue);
@@ -66,6 +64,12 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
     position: relative;
     text-align: left;
+  }
+
+  @media screen and (max-width: 487px) {
+    .repo-card {
+      min-width: 0;
+    }
   }
 
   /* .repo-card:hover {
