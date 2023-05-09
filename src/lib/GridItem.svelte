@@ -1,44 +1,24 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import FallbackImage from '../assets/fallback.png';
   import { loadRepoLanguage } from './LoadGithubData';
   // import LanguageBars from './LanguageBars.svelte';
   export let title: string;
   export let description: string;
   export let url: string;
-  export let imageBlob;
-  let imageUrl: string;
-
-  let languagesLoaded = false;
-  let thumbnailLoaded = false;
-
-  async function handleLanguages() {
-    if (languagesLoaded) return;
-
-    const languageData = await loadRepoLanguage(title);
-  }
-
-  async function handleThumbnails() {
-    if (thumbnailLoaded) return;
-
-    imageUrl = URL.createObjectURL(imageBlob);
-  }
-
-  onMount(handleThumbnails);
+  export let imageUrl: string;
 </script>
 
 <div class="repo-card">
   <a target="_blank" href={url}>
     <img
-      src={imageBlob}
+      src={imageUrl}
       alt="repository example"
-      on:error={() => (imageBlob = FallbackImage)}
+      on:error={() => (imageUrl = FallbackImage)}
     />
   </a>
   <div class="card-text">
     <h3 class="card-title">{title}</h3>
     <p class="description truncate">{description ?? ''}</p>
-    <!-- <LanguageBars languageData={languages} /> -->
   </div>
   <div class="card-link">
     <svg width="20" height="20">
