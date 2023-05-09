@@ -130,6 +130,12 @@
     flex: 1;
   }
 
+  @media screen and (max-width: 487px) {
+    main {
+      padding: 0;
+    }
+  }
+
   .loading-message {
     padding: 1rem;
     padding-top: var(--font-scale-3);
@@ -163,9 +169,6 @@
     }
   }
 
-  .grid-title {
-    align-self: baseline;
-  }
   .grid-showall-btn {
     position: relative;
     bottom: 1rem;
