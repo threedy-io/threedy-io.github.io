@@ -1,11 +1,13 @@
 <script lang="ts">
+  import type { LanguageBar } from './types';
+
   export let languageData: { [key: string]: number } = {
     Svelte: 7596,
     JavaScript: 900,
     HTML: 357,
     CSS: 210,
   };
-  let languageBars;
+  let languageBars: LanguageBar[];
 
   const totalAmount = Object.values(languageData).reduce(
     (total, amount) => total + amount,

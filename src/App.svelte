@@ -6,14 +6,7 @@
   import Header from './lib/Header.svelte';
   import { Tabs, TabList, TabPanel, Tab } from './lib/tabnav/tabs';
 
-  type Repository = {
-    html_url: string;
-    name: string;
-    description: string;
-    thumbnail: string;
-    topics: string[];
-    updated_at: any;
-  };
+  import type { Repository } from './lib/types';
 
   // Stores repo data and loading status
   let isLoading = true;
