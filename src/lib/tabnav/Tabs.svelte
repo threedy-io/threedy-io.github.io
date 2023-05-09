@@ -2,16 +2,17 @@
   export const TABS = {};
 </script>
 
-<script>
+<script lang="ts">
   import { setContext, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
+  import type { TabContext } from './tabTypes';
 
-  const tabs = [];
-  const panels = [];
-  const selectedTab = writable(null);
-  const selectedPanel = writable(null);
+  const tabs: symbol[] = [];
+  const panels: object[] = [];
+  const selectedTab = writable<symbol | null>(null);
+  const selectedPanel = writable<object | null>(null);
 
-  setContext(TABS, {
+  const contextValue: TabContext = {
     registerTab: (tab) => {
       tabs.push(tab);
       selectedTab.update((current) => current || tab);
@@ -46,7 +47,9 @@
 
     selectedTab,
     selectedPanel,
-  });
+  };
+
+  setContext(TABS, contextValue);
 </script>
 
 <div class="tabs">
