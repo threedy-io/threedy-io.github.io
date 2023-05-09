@@ -20,19 +20,25 @@
   let allRepoData: Repository[];
   let devRepos: Repository[];
   let integratorRepos: Repository[];
-  let topRepos: Repository[];
-
-  let showGridPanel = false;
+  let usecaseRepos: Repository[];
 
   const FIRST_TOPIC = import.meta.env.VITE_TOPIC_1;
   const SECOND_TOPIC = import.meta.env.VITE_TOPIC_2;
+  const THIRD_TOPIC = import.meta.env.VITE_TOPIC_3;
 
   async function loadAllData() {
     allRepoData = await loadAllRepos();
     allRepoData = allRepoData.sort(
       (repoA, repoB) => repoA.updated_at - repoB.updated_at
     );
-    topRepos = allRepoData.slice(0, 6);
+    usecaseRepos = allRepoData
+      .filter((repo) => {
+        return repo.topics.includes(THIRD_TOPIC);
+      })
+      .map((repo) => {
+        repo.topics = repo.topics.slice(0, 6);
+        return repo;
+      });
 
     devRepos = allRepoData.filter((repo) => repo.topics.includes(FIRST_TOPIC));
 
@@ -44,7 +50,6 @@
     for (const repo of allRepoData) {
       const thumbnailData = await loadImageWithoutToken(repo.name);
       repo.thumbnail = thumbnailData;
-      console.log(repo);
     }
     isLoading = false;
   }
@@ -54,30 +59,26 @@
 
 <main>
   <Header />
-  <div class="controls">
-    <input type="checkbox" name="dev" bind:checked={showGridPanel} />
-  </div>
+
   {#if isLoading}
     <p class="loading-message">Loading repositories...</p>
   {:else}
-    {#if showGridPanel}
-      <h2 class="grid-title">Use Cases</h2>
-      <div class="grid">
-        {#each topRepos as item}
-          <GridItem
-            url={item.html_url}
-            title={item.name}
-            description={item.description}
-            imageBlob={item.thumbnail}
-          />
-        {/each}
-      </div>
-      <a
-        href="https://github.com/threedy-io"
-        target="_blank"
-        class="grid-showall-btn">VIEW ALL PROJECTS</a
-      >
-    {/if}
+    <h2 class="grid-title">Use Cases</h2>
+    <div class="grid">
+      {#each usecaseRepos as item}
+        <GridItem
+          url={item.html_url}
+          title={item.name}
+          description={item.description}
+          imageUrl={item.thumbnail}
+        />
+      {/each}
+    </div>
+    <a
+      href="https://github.com/threedy-io"
+      target="_blank"
+      class="grid-showall-btn">VIEW ALL PROJECTS</a
+    >
 
     <Tabs>
       <TabList>
@@ -92,7 +93,7 @@
               url={item.html_url}
               title={item.name}
               description={item.description}
-              imageBlob={item.thumbnail}
+              imageUrl={item.thumbnail}
             />
           {/each}
         </div>
@@ -105,7 +106,7 @@
               url={item.html_url}
               title={item.name}
               description={item.description}
-              imageBlob={item.thumbnail}
+              imageUrl={item.thumbnail}
             />
           {/each}
         </div>
@@ -119,11 +120,6 @@
 </footer>
 
 <style>
-  .controls {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
   main {
     padding: 2rem;
     display: flex;
