@@ -1,14 +1,12 @@
 # instant3dhub examples portal
 
-Created using [Vite](https://vitejs.dev) with `npm create vite@latest instant3dhub-examples-portal --template react-ts`
+Created using [Vite](https://vitejs.dev) with `npm create vite@latest instant3dhub-examples-portal --template svelte-ts`
 
 ## Getting started
 
 As usual, run `npm i` inside the repo and start the dev server with `npm run dev`
-You'll need an API key from Gitlab for this to work. Add `VITE_GITLAB_TOKEN='your-bearer-token'` to a .env file in the project root
+To deploy to GitHub Pages, run `npm run deploy`
 
 ## Notes
-
-Currently, the structure assumes that end user, dev and integration examples are uploaded into different groups. It is also possible to nest them in Subgroups.
-When switching tabs, each group and its repositories are fetched again.
-An alternative solution would be to either put all the fetch requests into `app.tsx` and pass data to the children, but this would make the code more difficult to read.
+The values set in `.env` are all set up, but can be changed to access different repositories and topic tags.
+Currently, no API authentication is needed, images are fetched without using the API. Only one API call is made per page load, and all filtering is done on the client.
