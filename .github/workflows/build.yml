@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - feature-deploy-page
 
 jobs:
   build-and-deploy:
@@ -18,6 +18,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Set Git Identity
+        run: |
+          git config user.email "jeremy.ondrey@threedy.io"
+          git config user.name "jondreyThreedy"
 
       - name: Build and Deploy
         run: npm run deploy
