@@ -165,7 +165,7 @@
     padding-top: var(--font-scale-3);
     font-size: var(--font-scale-3);
     display: flex;
-    grid-column-start: 2;
+    flex-grow: 1;
   }
 
   .grid {
