@@ -56,3 +56,9 @@
   <div class="spacer" />
   <slot />
 </div>
+
+<style>
+  .tabs {
+    flex-grow: 1;
+  }
+</style>
