@@ -76,7 +76,6 @@
       target="_blank"
       class="grid-showall-btn">VIEW ALL PROJECTS</a
     > -->
-
     <Tabs>
       <TabList>
         <Tab>ALL PROJECTS</Tab>
@@ -86,7 +85,7 @@
       </TabList>
 
       <TabPanel>
-        <div class="grid">
+        <div class="flex flex-wrap">
           {#each allRepos as item}
             <GridItem
               url={item.html_url}
