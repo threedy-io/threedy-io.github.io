@@ -1,6 +1,8 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
+    "importsNotUsedAsValues": "remove", //remove deprecated options
+    "preserveValueImports": false,
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -16,6 +18,12 @@
     "checkJs": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "src/lib/**/*.svelte"],
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.svelte",
+    "src/lib/**/*.svelte"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
