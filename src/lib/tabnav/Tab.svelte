@@ -10,26 +10,6 @@
   registerTab(tab);
 </script>
 
-<button class:selected={$selectedTab === tab} on:click={() => selectTab(tab)}>
+<button class="tab tab-bordered" on:click={() => selectTab(tab)}>
   <slot />
 </button>
-
-<style>
-  button {
-    background: none;
-    border: none;
-    border-bottom: 2px solid white;
-    border-radius: 0;
-    margin: 0;
-    color: white;
-    font-size: var(--font-scale-4);
-    font-weight: 500;
-    margin-bottom: var(--font-scale-2);
-    outline: none;
-  }
-
-  .selected {
-    border-bottom: 2px solid var(--threedy-green);
-    color: var(--threedy-green);
-  }
-</style>

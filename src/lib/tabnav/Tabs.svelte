@@ -52,7 +52,6 @@
   setContext(TABS, contextValue);
 </script>
 
-<div class="tabs">
-  <div class="spacer" />
+<div class="tabs max-w-6xl max-w-7xl">
   <slot />
 </div>
