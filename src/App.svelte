@@ -192,29 +192,6 @@
     }
   }
 
-  .grid-showall-btn {
-    position: relative;
-    bottom: 1rem;
-    font-size: var(--font-scale-4);
-    margin-bottom: 3rem;
-    border-radius: 0;
-    border: 1px solid transparent;
-    color: var(--threedy-dark-blue);
-    padding: 0.6em 1.2em;
-    font-size: var(--font-scale-4);
-    font-weight: 500;
-    font-family: inherit;
-    background-color: var(--threedy-green);
-    cursor: pointer;
-    transition: all 60ms ease-in-out;
-    border: 2px solid transparent;
-  }
-  .grid-showall-btn:hover {
-    border: 2px solid var(--threedy-green);
-    background-color: transparent;
-    color: var(--threedy-green);
-  }
-
   footer {
     color: var(--threedy-green);
     z-index: 2;
