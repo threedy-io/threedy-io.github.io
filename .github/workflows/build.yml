@@ -33,7 +33,7 @@ jobs:
         run: |
           tar \
             --dereference --hard-dereference \
-            --directory dist \
+            --directory "$INPUT_PATH" \
             -cvf "$RUNNER_TEMP/artifact.tar" \
             --exclude=.git \
             --exclude=.github \
