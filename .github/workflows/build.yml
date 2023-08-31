@@ -37,6 +37,7 @@ jobs:
             -cvf "$RUNNER_TEMP/artifact.tar" \
             --exclude=.git \
             --exclude=.github \
+            .
         
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
