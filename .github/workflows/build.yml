@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - feature/build-deploy-with-actions
+      - main
 
 jobs:
   build-and-deploy:
